@@ -1,12 +1,10 @@
 package com.api.course.modules.course.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -25,11 +23,13 @@ public class CourseEntity {
     @NotBlank()
     private String category;
 
-    private boolean Active = true;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "active", nullable = false)
+    private ActiveStatus Active;
 
     @CreationTimestamp
     private LocalDateTime created_at;
 
-    @CreationTimestamp
+    @UpdateTimestamp
     private LocalDateTime updated_at;
 }
